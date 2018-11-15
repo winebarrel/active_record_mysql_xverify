@@ -1,0 +1,10 @@
+Metrics/LineLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
