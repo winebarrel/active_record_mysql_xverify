@@ -6,6 +6,10 @@
 /pkg/
 /spec/reports/
 /tmp/
+/test.rb
 
 # rspec failure tracking
 .rspec_status
+
+# Appraisal Gemfile.lock
+/gemfiles/*.lock
