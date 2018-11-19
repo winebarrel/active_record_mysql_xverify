@@ -2,6 +2,9 @@
 
 It is a library that performs extended verification when an error occurs when executing SQL.
 
+[![Gem Version](https://badge.fury.io/rb/active_record_mysql_xverify.svg)](http://badge.fury.io/rb/active_record_mysql_xverify)
+[![Build Status](https://travis-ci.org/winebarrel/active_record_mysql_xverify.svg?branch=master)](https://travis-ci.org/winebarrel/active_record_mysql_xverify)
+
 ## Installation
 
 Add this line to your application's Gemfile:
