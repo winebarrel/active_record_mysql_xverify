@@ -18,6 +18,53 @@ Or install it yourself as:
 
     $ gem install active_record_mysql_xverify
 
+## Usage
+
+```ruby
+#!/usr/bin/env ruby
+require 'active_record'
+require 'active_record_mysql_xverify'
+require 'logger'
+
+ActiveRecord::Base.establish_connection(
+  adapter:  'mysql2',
+  host:     '127.0.0.1',
+  username: 'root',
+  database: 'bookshelf',
+)
+
+ActiveRecord::Base.logger = Logger.new($stdout)
+ActiveRecord::Base.logger.formatter = proc {|_, _, _, message| "#{message}\n" }
+
+ActiveRecordMysqlXverify.verify = ->(conn) do
+  conn.ping && false # force reconnect
+end
+# Default: ->(conn) { conn.ping }
+
+ActiveRecordMysqlXverify.handle_if = ->(config) do
+  config[:host] == '127.0.0.1'
+end
+# Default: ->(_) { true }
+
+ActiveRecordMysqlXverify.only_on_error = false
+# Default: true
+
+# CREATE DATABASE IF NOT EXISTS bookshelf;
+# CREATE TABLE bookshelf.books (id INT PRIMARY KEY);
+class Book < ActiveRecord::Base; end
+
+Book.count
+prev_thread_id = Book.connection.raw_connection.thread_id
+
+ActiveRecord::Base.connection_handler.connection_pool_list.each(&:release_connection)
+
+Book.count
+curr_thread_id = Book.connection.raw_connection.thread_id
+
+p curr_thread_id == prev_thread_id #=> false
+```
+
+
 ## Rails configuration
 
 In `config/environments/production.rb`:
@@ -28,18 +75,9 @@ ActiveRecordMysqlXverify.verify = ->(conn) do
 end
 # Same as below:
 #   ActiveRecordMysqlXverify.verify = ActiveRecordMysqlXverify::Verifiers::AURORA_MASTER
-# Default: ->(conn) { conn.ping }
-
-ActiveRecordMysqlXverify.handle_if = ->(config) do
-  config[:host] =~ /\Amy-cluster\./
-end
-# Default: ->(_) { true }
-
-ActiveRecordMysqlXverify.only_on_error = false
-# Default: true
 ```
 
-## Example
+## Rails log example
 
 ```
 Started PATCH "/items/1" for 127.0.0.1 at 2018-11-15 15:47:31 +0900
