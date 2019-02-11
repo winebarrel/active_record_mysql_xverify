@@ -1,6 +1,6 @@
 appraise 'ar42' do
   gem 'activerecord', '~> 4.2.10'
-  gem 'mysql2', '< 0.5'
+  gem 'pg'
 end
 
 appraise 'ar50' do

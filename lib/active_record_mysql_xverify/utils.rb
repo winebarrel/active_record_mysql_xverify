@@ -7,8 +7,7 @@ module ActiveRecordMysqlXverify
                     rescue StandardError
                       nil
                     end
-
-        "host=#{conn.query_options[:host]}, database=#{conn.query_options[:database]}, " \
+        "host=#{conn.conninfo_hash[:host]}, dbname=#{conn.conninfo_hash[:dbname]}, " \
           "username=#{conn.query_options[:username]}, thread_id=#{thread_id}"
       end
     end

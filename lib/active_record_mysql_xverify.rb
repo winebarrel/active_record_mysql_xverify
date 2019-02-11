@@ -10,8 +10,7 @@ require 'active_record_mysql_xverify/verifier'
 require 'active_record_mysql_xverify/verifiers/aurora_master'
 
 ActiveSupport.on_load :active_record do
-  require 'active_record/connection_adapters/abstract_mysql_adapter'
-  require 'active_record/connection_adapters/mysql2_adapter'
-  ActiveRecord::ConnectionAdapters::Mysql2Adapter.prepend ActiveRecordMysqlXverify::ErrorHandler
-  ActiveRecord::ConnectionAdapters::Mysql2Adapter.prepend ActiveRecordMysqlXverify::Verifier
+  require 'active_record/connection_adapters/postgresql_adapter'
+  ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend ActiveRecordMysqlXverify::Verifier
+  ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend ActiveRecordMysqlXverify::ErrorHandler
 end
