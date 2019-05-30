@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveRecordMysqlXverify
   module Verifiers
     AURORA_MASTER = lambda do |conn|

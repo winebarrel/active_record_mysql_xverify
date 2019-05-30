@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveRecordMysqlXverify
   module ErrorHandler
     def execute(*)

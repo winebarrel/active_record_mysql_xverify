@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveRecordMysqlXverify
   class << self
     def logger
