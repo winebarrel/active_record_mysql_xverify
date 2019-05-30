@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 appraise 'ar42' do
   gem 'activerecord', '~> 4.2.10'
   gem 'mysql2', '< 0.5'

@@ -128,3 +128,11 @@ Processing by ItemsController#update as */*
 Redirected to http://localhost:3000/items/1
 Completed 302 Found in 150ms (ActiveRecord: 145.2ms)
 ```
+
+## Test
+
+```
+bundle install
+docker-compose up -d
+bundle exec rake
+```
