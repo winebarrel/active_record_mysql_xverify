@@ -133,6 +133,7 @@ Completed 302 Found in 150ms (ActiveRecord: 145.2ms)
 
 ```
 bundle install
+bundle exec appraisal install
 docker-compose up -d
-bundle exec rake
+bundle exec appraisal ar52 rake
 ```
