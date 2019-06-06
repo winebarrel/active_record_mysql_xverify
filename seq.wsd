@@ -11,8 +11,7 @@ activate Rails
 Rails -> MySQL : Query
 activate MySQL
 group neg
-  Rails <-- MySQL : <font color=red>Error</font>
-  note right : read-only error
+  Rails <-- MySQL : <font color=red>"read-only" error happen!</font>
   deactivate MySQL
   Client <-- Rails : <font color=red>Error</font>
   deactivate Rails
