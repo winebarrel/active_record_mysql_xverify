@@ -46,5 +46,21 @@ module SpecHelper
   def active_record_release_connections
     ActiveRecord::Base.connection_handler.connection_pool_list.each(&:release_connection)
   end
+
+  def thread_id_changes(model)
+    prev_thread_id = model.connection.raw_connection.thread_id
+    active_record_release_connections
+    yield
+    curr_thread_id = model.connection.raw_connection.thread_id
+    expect(curr_thread_id).to_not eq prev_thread_id
+  end
+
+  def thread_id_does_not_change(model)
+    prev_thread_id = model.connection.raw_connection.thread_id
+    active_record_release_connections
+    yield
+    curr_thread_id = model.connection.raw_connection.thread_id
+    expect(curr_thread_id).to eq prev_thread_id
+  end
 end
 include SpecHelper # rubocop:disable Style/MixinUsage

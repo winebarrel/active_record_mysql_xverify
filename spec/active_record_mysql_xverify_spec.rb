@@ -32,13 +32,10 @@ RSpec.describe ActiveRecordMysqlXverify do
       ).twice
 
       expect(Book.count).to be_zero
-      prev_thread_id = Book.connection.raw_connection.thread_id
 
-      active_record_release_connections
-
-      expect(Book.count).to be_zero
-      curr_thread_id = Book.connection.raw_connection.thread_id
-      expect(curr_thread_id).to_not eq prev_thread_id
+      thread_id_changes(Book) do
+        expect(Book.count).to be_zero
+      end
 
       expect(called[:verify]).to be_truthy
       expect(called[:handle_if]).to be_truthy
@@ -57,13 +54,10 @@ RSpec.describe ActiveRecordMysqlXverify do
       expect(ActiveRecordMysqlXverify.logger).to_not receive(:info)
 
       expect(Book.count).to be_zero
-      prev_thread_id = Book.connection.raw_connection.thread_id
 
-      active_record_release_connections
-
-      expect(Book.count).to be_zero
-      curr_thread_id = Book.connection.raw_connection.thread_id
-      expect(curr_thread_id).to eq prev_thread_id
+      thread_id_does_not_change(Book) do
+        expect(Book.count).to be_zero
+      end
 
       expect(called[:verify]).to be_truthy
       expect(called[:handle_if]).to be_truthy
@@ -78,13 +72,10 @@ RSpec.describe ActiveRecordMysqlXverify do
         expect(ActiveRecordMysqlXverify.logger).to_not receive(:info)
 
         expect(Book.count).to be_zero
-        prev_thread_id = Book.connection.raw_connection.thread_id
 
-        active_record_release_connections
-
-        expect(Book.count).to be_zero
-        curr_thread_id = Book.connection.raw_connection.thread_id
-        expect(curr_thread_id).to eq prev_thread_id
+        thread_id_does_not_change(Book) do
+          expect(Book.count).to be_zero
+        end
 
         expect(called[:verify]).to be_falsey
         expect(called[:handle_if]).to be_falsey
@@ -99,13 +90,10 @@ RSpec.describe ActiveRecordMysqlXverify do
           )
 
           expect { Book.connection.execute('INVALID SQL') }.to raise_error(ActiveRecord::StatementInvalid)
-          prev_thread_id = Book.connection.raw_connection.thread_id
 
-          active_record_release_connections
-
-          expect(Book.count).to be_zero
-          curr_thread_id = Book.connection.raw_connection.thread_id
-          expect(curr_thread_id).to_not eq prev_thread_id
+          thread_id_changes(Book) do
+            expect(Book.count).to be_zero
+          end
 
           expect(called[:verify]).to be_truthy
           expect(called[:handle_if]).to be_truthy
@@ -124,13 +112,10 @@ RSpec.describe ActiveRecordMysqlXverify do
           expect(ActiveRecordMysqlXverify.logger).to_not receive(:info)
 
           expect { Book.connection.execute('INVALID SQL') }.to raise_error(ActiveRecord::StatementInvalid)
-          prev_thread_id = Book.connection.raw_connection.thread_id
 
-          active_record_release_connections
-
-          expect(Book.count).to be_zero
-          curr_thread_id = Book.connection.raw_connection.thread_id
-          expect(curr_thread_id).to eq prev_thread_id
+          thread_id_does_not_change(Book) do
+            expect(Book.count).to be_zero
+          end
 
           expect(called[:verify]).to be_truthy
           expect(called[:handle_if]).to be_truthy
@@ -151,13 +136,10 @@ RSpec.describe ActiveRecordMysqlXverify do
       expect(ActiveRecordMysqlXverify.logger).to_not receive(:info)
 
       expect(Book.count).to be_zero
-      prev_thread_id = Book.connection.raw_connection.thread_id
 
-      active_record_release_connections
-
-      expect(Book.count).to be_zero
-      curr_thread_id = Book.connection.raw_connection.thread_id
-      expect(curr_thread_id).to eq prev_thread_id
+      thread_id_does_not_change(Book) do
+        expect(Book.count).to be_zero
+      end
 
       expect(called[:verify]).to be_falsey
       expect(called[:handle_if]).to be_truthy
