@@ -1,0 +1,39 @@
+@startuml{seq.png}
+
+actor Client
+participant Rails
+participant "Connection pool" as cp
+participant "<size:10>active_recode_mysql_xverify</size>" as armx
+participant MySQL
+
+Client -> Rails : Request
+activate Rails
+Rails -> MySQL : Query
+activate MySQL
+group neg
+  Rails <-- MySQL : <font color=red>Error</font>
+  note right : read-only error
+  deactivate MySQL
+  Client <-- Rails : <font color=red>Error</font>
+  deactivate Rails
+end
+
+Client -> Rails : Request
+activate Rails
+Rails -> cp : checkout
+activate cp
+cp -> armx : active?
+activate armx
+armx -> MySQL : Fetch "innodb_read_only"
+activate MySQL
+armx <-- MySQL : "ON"
+deactivate MySQL
+cp <-- armx : false
+deactivate armx
+cp --> MySQL : reconnect!
+activate MySQL
+deactivate MySQL
+Rails <-- cp : Connection
+deactivate cp
+
+@enduml
