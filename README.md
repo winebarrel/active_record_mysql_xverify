@@ -11,7 +11,7 @@ cf. https://github.com/brianmario/mysql2/issues/948
 
 ## How it works
 
-![](https://user-images.githubusercontent.com/117768/59006641-04c78a00-885e-11e9-9067-7286cb2508a8.png)
+![](https://user-images.githubusercontent.com/117768/59007604-19a61c80-8862-11e9-9f4b-515527b33ded.png)
 
 ## Installation
 
