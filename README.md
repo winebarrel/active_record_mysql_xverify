@@ -1,9 +1,15 @@
 # active_record_mysql_xverify
 
-It is a library that performs extended verification when an error occurs when executing SQL.
+It is a library to solve Amazon RDS failover problems.
+
+cf. https://github.com/brianmario/mysql2/issues/948
 
 [![Gem Version](https://badge.fury.io/rb/active_record_mysql_xverify.svg)](http://badge.fury.io/rb/active_record_mysql_xverify)
 [![Build Status](https://travis-ci.org/winebarrel/active_record_mysql_xverify.svg?branch=master)](https://travis-ci.org/winebarrel/active_record_mysql_xverify)
+
+## How it works
+
+![](https://user-images.githubusercontent.com/117768/59006641-04c78a00-885e-11e9-9067-7286cb2508a8.png)
 
 ## Installation
 
