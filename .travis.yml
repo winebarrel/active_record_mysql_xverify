@@ -6,8 +6,7 @@ rvm:
   - 2.6.6
   - 2.7.1
 env:
-  - DATABASE_HOST=localhost
-  - DATABASE_USER=travis
+  - DATABASE_HOST=localhost DATABASE_USER=travis
 before_install:
   - for i in {1..60}; do mysqladmin -u travis ping && break; sleep 1; done
 script:
