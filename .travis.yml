@@ -19,3 +19,7 @@ gemfile:
   - gemfiles/ar60.gemfile
 services:
   - mysql
+jobs:
+  exclude:
+    - rvm: 2.7.1
+      gemfile: gemfiles/ar42.gemfile
