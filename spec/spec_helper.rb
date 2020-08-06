@@ -3,7 +3,7 @@
 require 'bundler/setup'
 require 'active_record'
 require 'active_record_mysql_xverify'
-require 'model/book.rb'
+require 'model/book'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -19,17 +19,15 @@ RSpec.configure do |config|
   config.before :all do
     conn_spec = {
       adapter: 'mysql2',
-      host: '127.0.0.1',
-      username: 'root',
+      host: ENV.fetch('DATABASE_HOST', 'mysql'),
+      username: ENV.fetch('DATABASE_USER', 'root'),
       database: 'bookshelf',
-      port: 6033,
     }
 
     ActiveRecord::Base.establish_connection(conn_spec)
 
     @mysql = Mysql2::Client.new(
       host: conn_spec.fetch(:host),
-      port: conn_spec.fetch(:port),
       username: conn_spec.fetch(:username)
     )
 
