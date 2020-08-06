@@ -1,17 +1,14 @@
 ---
-dist: xenial
-sudo: required
 language: ruby
 cache: bundler
 rvm:
-  - 2.3.8
-  - 2.4.6
-  - 2.5.3
-  - 2.6.3
+  - 2.5.8
+  - 2.6.6
+  - 2.7.1
+env:
+  - DATABASE_HOST=localhost DATABASE_USER=travis
 before_install:
-  - docker-compose up -d
-  - function mysql_ping { mysqladmin -u root -h 127.0.0.1 -P 6033 ping > /dev/null 2> /dev/null; }
-  - for i in {1..60}; do mysql_ping && break; sleep 1; done
+  - for i in {1..60}; do mysqladmin -u travis ping && break; sleep 1; done
 script:
   - bundle exec rake
 gemfile:
@@ -19,8 +16,10 @@ gemfile:
   - gemfiles/ar50.gemfile
   - gemfiles/ar51.gemfile
   - gemfiles/ar52.gemfile
-addons:
-  apt:
-    packages:
-      - mysql-client-core-5.7
-      - mysql-client-5.7
+  - gemfiles/ar60.gemfile
+services:
+  - mysql
+jobs:
+  exclude:
+    - rvm: 2.7.1
+      gemfile: gemfiles/ar42.gemfile

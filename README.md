@@ -139,11 +139,11 @@ Completed 302 Found in 150ms (ActiveRecord: 145.2ms)
 
 ## Test
 
-```
-bundle install
-bundle exec appraisal install
-docker-compose up -d
-bundle exec appraisal ar52 rake
+## Test
+
+```sh
+docker-compose build
+docker-compose run client bundle exec appraisal ar60 rake
 ```
 
 ## Related links
