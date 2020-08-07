@@ -3,7 +3,7 @@
 module ActiveRecordMysqlXverify
   module Verifiers
     AURORA_MASTER = lambda do |conn|
-      conn.ping && conn.query('show variables like "innodb_read_only"').first.fetch(1) == 'OFF'
+      conn.ping && conn.query('select @@innodb_read_only').first.fetch('@@innodb_read_only').zero?
     end
   end
 end
