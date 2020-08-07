@@ -82,7 +82,7 @@ In `config/environments/production.rb`:
 
 ```ruby
 ActiveRecordMysqlXverify.verify = ->(conn) do
-  conn.ping && conn.query('show variables like "innodb_read_only"').first.fetch(1) == 'OFF'
+  conn.ping && conn.query('select @@innodb_read_only').first.fetch('@@innodb_read_only').zero?
 end
 # Same as below:
 #   ActiveRecordMysqlXverify.verify = ActiveRecordMysqlXverify::Verifiers::AURORA_MASTER
