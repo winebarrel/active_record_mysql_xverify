@@ -4,7 +4,7 @@ module ActiveRecordMysqlXverify
   @config = {
     handle_if: ->(_) { true },
     verify: ->(conn) { conn.ping },
-    only_on_error: true,
+    only_on_error: false,
   }
 
   class << self

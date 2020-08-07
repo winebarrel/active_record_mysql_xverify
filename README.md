@@ -57,9 +57,6 @@ ActiveRecordMysqlXverify.handle_if = ->(config) do
 end
 # Default: ->(_) { true }
 
-ActiveRecordMysqlXverify.only_on_error = false
-# Default: true
-
 # CREATE DATABASE IF NOT EXISTS bookshelf;
 # CREATE TABLE bookshelf.books (id INT PRIMARY KEY);
 class Book < ActiveRecord::Base; end
