@@ -17,13 +17,6 @@ RSpec.configure do |config|
   end
 
   config.before :all do
-    conn_spec = {
-      adapter: 'mysql2',
-      host: ENV.fetch('DATABASE_HOST', 'mysql'),
-      username: ENV.fetch('DATABASE_USER', 'root'),
-      database: 'bookshelf',
-    }
-
     ActiveRecord::Base.establish_connection(conn_spec)
 
     @mysql = Mysql2::Client.new(
@@ -43,6 +36,15 @@ end
 module SpecHelper
   def active_record_release_connections
     ActiveRecord::Base.connection_handler.connection_pool_list.each(&:release_connection)
+  end
+
+  def conn_spec
+    {
+      adapter: 'mysql2',
+      host: ENV.fetch('DATABASE_HOST', 'mysql'),
+      username: ENV.fetch('DATABASE_USER', 'root'),
+      database: 'bookshelf',
+    }
   end
 
   def thread_id_changes(model)
