@@ -78,11 +78,7 @@ p curr_thread_id == prev_thread_id #=> false
 In `config/environments/production.rb`:
 
 ```ruby
-ActiveRecordMysqlXverify.verify = ->(conn) do
-  conn.ping && conn.query('select @@innodb_read_only').first.fetch('@@innodb_read_only').zero?
-end
-# Same as below:
-#   ActiveRecordMysqlXverify.verify = ActiveRecordMysqlXverify::Verifiers::AURORA_MASTER
+ActiveRecordMysqlXverify.verify = ActiveRecordMysqlXverify::Verifiers::AURORA_MASTER
 ```
 
 ## Rails log example
