@@ -53,6 +53,8 @@ end
 # Default: ->(conn) { conn.ping }
 
 ActiveRecordMysqlXverify.handle_if = ->(config) do
+  # Check Aurora writer node
+  # NOTE: DO NOT verify reader node connection
   config[:host] == '127.0.0.1'
 end
 # Default: ->(_) { true }
