@@ -5,14 +5,14 @@ module ActiveRecordMysqlXverify
     def active?
       if _extend_verify?
         is_active = begin
-                      verifier = ActiveRecordMysqlXverify.verify
-                      verifier.call(@connection)
-                    rescue StandardError => e
-                      ActiveRecordMysqlXverify.logger.warn("Connection verification failed: #{_build_verify_error_message(e)}")
-                      false
-                    ensure
-                      Thread.current[ActiveRecordMysqlXverify::EXTEND_VERIFY_FLAG] = false
-                    end
+          verifier = ActiveRecordMysqlXverify.verify
+          verifier.call(@connection)
+        rescue StandardError => e
+          ActiveRecordMysqlXverify.logger.warn("Connection verification failed: #{_build_verify_error_message(e)}")
+          false
+        ensure
+          Thread.current[ActiveRecordMysqlXverify::EXTEND_VERIFY_FLAG] = false
+        end
 
         unless is_active
           ActiveRecordMysqlXverify.logger.info(
