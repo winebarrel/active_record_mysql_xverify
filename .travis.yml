@@ -12,7 +12,6 @@ before_install:
 script:
   - bundle exec rake
 gemfile:
-  - gemfiles/ar42.gemfile
   - gemfiles/ar50.gemfile
   - gemfiles/ar51.gemfile
   - gemfiles/ar52.gemfile

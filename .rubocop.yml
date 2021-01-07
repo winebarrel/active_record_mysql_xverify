@@ -14,8 +14,6 @@ Style/Documentation:
   Enabled: false
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Gemspec/RequiredRubyVersion:
-  Enabled: false
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
