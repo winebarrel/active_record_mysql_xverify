@@ -134,8 +134,6 @@ Completed 302 Found in 150ms (ActiveRecord: 145.2ms)
 
 ## Test
 
-## Test
-
 ```sh
 docker-compose build
 docker-compose run client bundle exec appraisal ar60 rake
