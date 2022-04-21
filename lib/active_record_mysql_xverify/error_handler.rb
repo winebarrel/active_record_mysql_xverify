@@ -2,7 +2,7 @@
 
 module ActiveRecordMysqlXverify
   module ErrorHandler
-    def execute(*)
+    def execute(*, **)
       super
     rescue StandardError
       _flag_extend_verify!
