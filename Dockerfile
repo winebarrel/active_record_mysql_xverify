@@ -1,4 +1,4 @@
-FROM rubylang/ruby:2.5-bionic
+FROM rubylang/ruby:2.7
 
 RUN apt-get update && \
   apt-get install -y \
