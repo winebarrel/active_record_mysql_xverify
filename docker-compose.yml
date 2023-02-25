@@ -2,7 +2,7 @@ services:
   client:
     build: .
     volumes:
-      - ./:/mnt:ro
+      - ./:/mnt
     depends_on:
       - mysql
     profiles:
