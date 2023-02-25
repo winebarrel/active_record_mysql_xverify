@@ -25,6 +25,7 @@ jobs:
           - 3.2
         gemfile:
           - gemfiles/ar60.gemfile
+          - gemfiles/ar61.gemfile
     env:
       DATABASE_HOST: 127.0.0.1
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
