@@ -22,17 +22,7 @@ jobs:
           - 2.7
           - 3.0
         gemfile:
-          - gemfiles/ar50.gemfile
-          - gemfiles/ar51.gemfile
-          - gemfiles/ar52.gemfile
           - gemfiles/ar60.gemfile
-        exclude:
-          - ruby: 3.0
-            gemfile: gemfiles/ar50.gemfile
-          - ruby: 3.0
-            gemfile: gemfiles/ar51.gemfile
-          - ruby: 3.0
-            gemfile: gemfiles/ar52.gemfile
     env:
       DATABASE_HOST: 127.0.0.1
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
