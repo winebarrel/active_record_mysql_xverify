@@ -135,10 +135,9 @@ Completed 302 Found in 150ms (ActiveRecord: 145.2ms)
 ## Test
 
 ```sh
-docker compose build
 docker compose up -d
-docker compose run --rm client bundle exec appraisal install
-docker compose run --rm client bundle exec appraisal ar60 rake
+docker compose build client
+docker compose run --rm client appraisal ar60 rake
 ```
 
 ## Related links

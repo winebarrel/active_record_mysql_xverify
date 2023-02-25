@@ -26,23 +26,15 @@ jobs:
         gemfile:
           - gemfiles/ar60.gemfile
           - gemfiles/ar61.gemfile
+          - gemfiles/ar70.gemfile
     env:
       DATABASE_HOST: 127.0.0.1
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v2
-        with:
-          path: gemfiles/vendor/bundle
-          key: ${{ runner.os }}-gems-${{ matrix.ruby }}-${{ matrix.gemfile }}
-          restore-keys: |
-            ${{ runner.os }}-gems-${{ matrix.ruby }}-${{ matrix.gemfile }}
-      - name: Setup dependencies
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
-      - name: Run tests
-        run: bundle exec rake
+          bundler-cache: true
+      - run: bundle install
+      - run: bundle exec rake
