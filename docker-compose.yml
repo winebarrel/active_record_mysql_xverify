@@ -1,11 +1,12 @@
-version: "3.8"
 services:
   client:
     build: .
     volumes:
-      - ./:/mnt
+      - ./:/mnt:ro
     depends_on:
       - mysql
+    profiles:
+      - extra
   mysql:
     image: mysql:5.7
     environment:
