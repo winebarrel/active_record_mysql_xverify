@@ -3,11 +3,15 @@ services:
     build: .
     volumes:
       - ./:/mnt
-    depends_on:
-      - mysql
+      - gems_bin:/usr/local/bin
+      - gems:/usr/local/lib/ruby/gems/2.7.0
     profiles:
       - extra
   mysql:
+    platform: linux/amd64
     image: mysql:5.7
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+volumes:
+  gems_bin:
+  gems:
