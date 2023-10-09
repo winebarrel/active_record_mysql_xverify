@@ -134,10 +134,20 @@ Completed 302 Found in 150ms (ActiveRecord: 145.2ms)
 
 ## Test
 
+### Preparation
+
+```sh
+docker compose build client
+docker compose run --rm client gem update bundler
+docker compose run --rm client bundle install
+docker compose run --rm client appraisal install
+```
+
+### Run tests
+
 ```sh
 docker compose up -d
-docker compose build client
-docker compose run --rm client appraisal ar60 rake
+docker compose run client appraisal ar60 rake
 ```
 
 ## Related links
