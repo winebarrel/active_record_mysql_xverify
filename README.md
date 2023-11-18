@@ -4,7 +4,8 @@ It is a library to solve Amazon RDS failover problems.
 
 cf. https://github.com/brianmario/mysql2/issues/948
 
-**Note: This library does not retry queries. Just reconnect.**
+> [!note]
+> **This library does not retry queries. Just reconnect.**
 
 [![Gem Version](https://badge.fury.io/rb/active_record_mysql_xverify.svg)](http://badge.fury.io/rb/active_record_mysql_xverify)
 [![Build Status](https://github.com/winebarrel/active_record_mysql_xverify/workflows/test/badge.svg?branch=master)](https://github.com/winebarrel/active_record_mysql_xverify/actions)
